@@ -1,16 +1,17 @@
-# tco_calculator
+# TCO Calculator
 
 Total Cost of Ownership Calculator
 
-## Getting Started
+## Installing
+Run terminal as administrator
+Create new folder:  example 'mkdir d:\..\example'
+Enter to new folder:  example 'cd d:\..\example'
+For clone the repository use: 'git clone https://github.com/SkyNet322/Student_projects_mobile.git'
+Then open the created folder with cloned repository on your IDE
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Установка
+Запустите терминал(командную строку) от имени администратора
+Создайте новую папку: пример 'mkdir d:\..\example'
+Перейдите в новую папку: пример 'cd d:\..\example'
+Для клонирования репозитория используйте: 'git clone https://github.com/SkyNet322/Student_projects_mobile.git'
+Далее откройте созданую ранее папку с клонированным репозиторием в своей IDE
