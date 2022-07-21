@@ -2,7 +2,7 @@
     package="com.example.tco_calculator">
     <uses-permission android:name="android.permission.INTERNET" />
    <application
-        android:label="tco_calculator"
+        android:label="TCO Calculator"
         android:usesCleartextTraffic="true"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">

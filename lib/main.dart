@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tco_calculator/authorization.dart';
+import 'package:tco_calculator/datainput.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -13,7 +15,6 @@ class MyApp extends StatelessWidget {
 
       theme: ThemeData(
         useMaterial3: true,
-        primaryColor: Colors.amber
       ),
       home: AuthorizationPage(),
     );
