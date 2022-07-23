@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:tco_calculator/authorization.dart';
 import 'package:tco_calculator/datainput.dart';
+import 'package:tco_calculator/infrastructure.dart';
+import 'package:tco_calculator/licensesNsoftware.dart';
+
 
 void main() {
   runApp(const MyApp());
@@ -16,7 +19,13 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         useMaterial3: true,
       ),
-      home: AuthorizationPage(),
+      initialRoute: '/',
+      routes: {
+        '/' : (context) => AuthorizationPage(),
+        '/datainput': (context) => dataInput(),
+        '/infrastructure' : (context) => infrastructurePage(),
+        '/licNsoft' : (context) => licensesNsoftwarePage(),
+      },
     );
   }
 }
