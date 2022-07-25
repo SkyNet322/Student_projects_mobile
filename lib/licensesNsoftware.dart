@@ -92,7 +92,7 @@ class _licensesNsoftwarePageState extends State<licensesNsoftwarePage> {
                           padding: EdgeInsets.only(top: 10, bottom: 10),
                           child: Text(
                             textAlign: TextAlign.center,
-                            "Инфраструктура",
+                            "Лицензии и программное обеспечение",
                             style: TextStyle(color: Colors.black, fontSize: 20),
                           ),
                           decoration: BoxDecoration(
