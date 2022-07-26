@@ -36,6 +36,8 @@ class _infrastructurePageState extends State<infrastructurePage> {
     ),
   );
 
+
+
   @override
   void initState() {
     super.initState();
@@ -442,9 +444,9 @@ class _infrastructurePageState extends State<infrastructurePage> {
                             ),
                           ],
                           border: TableBorder.all(
-                            color: Colors.black,
-                            borderRadius: BorderRadius.circular(5),
-                            width: 2,
+                            color: Colors.grey,
+                            borderRadius: BorderRadius.circular(10),
+                            width: 1,
                           ),
                         ),
                         SizedBox(

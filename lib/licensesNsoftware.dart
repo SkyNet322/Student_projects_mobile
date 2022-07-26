@@ -401,9 +401,9 @@ class _licensesNsoftwarePageState extends State<licensesNsoftwarePage> {
                             ),
                           ],
                           border: TableBorder.all(
-                            color: Colors.black,
-                            borderRadius: BorderRadius.circular(5),
-                            width: 2,
+                            color: Colors.grey,
+                            borderRadius: BorderRadius.circular(10),
+                            width: 1,
                           ),
                         ),
                         SizedBox(
