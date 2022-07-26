@@ -8,9 +8,36 @@ class staffPage extends StatefulWidget {
 }
 
 class _staffPageState extends State<staffPage> {
-
-
-
+  final TextEditingController firstLineJob = TextEditingController();
+  final TextEditingController firstLineBidAmount = TextEditingController();
+  final TextEditingController firstLineTax = TextEditingController();
+  final TextEditingController firstLineSalary = TextEditingController();
+  final TextEditingController firstLineMounthAmount = TextEditingController();
+  final TextEditingController secondLineJob = TextEditingController();
+  final TextEditingController secondLineBidAmount = TextEditingController();
+  final TextEditingController secondLineTax = TextEditingController();
+  final TextEditingController secondLineSalary = TextEditingController();
+  final TextEditingController secondLineMounthAmount = TextEditingController();
+  final TextEditingController thirdLineJob = TextEditingController();
+  final TextEditingController thirdLineBidAmount = TextEditingController();
+  final TextEditingController thirdLineTax = TextEditingController();
+  final TextEditingController thirdLineSalary = TextEditingController();
+  final TextEditingController thirdLineMounthAmount = TextEditingController();
+  final TextEditingController fourthLineJob = TextEditingController();
+  final TextEditingController fourthLineBidAmount = TextEditingController();
+  final TextEditingController fourthLineTax = TextEditingController();
+  final TextEditingController fourthLineSalary = TextEditingController();
+  final TextEditingController fourthLineMounthAmount = TextEditingController();
+  final TextEditingController fifthLineJob = TextEditingController();
+  final TextEditingController fifthLineBidAmount = TextEditingController();
+  final TextEditingController fifthLineTax = TextEditingController();
+  final TextEditingController fifthLineSalary = TextEditingController();
+  final TextEditingController fifthLineMounthAmount = TextEditingController();
+  final TextEditingController sixthLineJob = TextEditingController();
+  final TextEditingController sixthLineBidAmount = TextEditingController();
+  final TextEditingController sixthLineTax = TextEditingController();
+  final TextEditingController sixthLineSalary = TextEditingController();
+  final TextEditingController sixthLineMounthAmount = TextEditingController();
 
   bool visibilityTableRow = false;
 
@@ -173,6 +200,7 @@ class _staffPageState extends State<staffPage> {
                             height: 50,
                             width: 250,
                             child: TextFormField(
+                              controller: firstLineJob,
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder())),
                           ),
@@ -185,6 +213,7 @@ class _staffPageState extends State<staffPage> {
                             height: 50,
                             width: 250,
                             child: TextFormField(
+                              controller: firstLineBidAmount,
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder())),
                           ),
@@ -197,6 +226,7 @@ class _staffPageState extends State<staffPage> {
                             height: 50,
                             width: 250,
                             child: TextFormField(
+                              controller: firstLineTax,
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder())),
                           ),
@@ -209,6 +239,7 @@ class _staffPageState extends State<staffPage> {
                             height: 50,
                             width: 250,
                             child: TextFormField(
+                              controller: firstLineSalary,
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder())),
                           ),
@@ -221,6 +252,7 @@ class _staffPageState extends State<staffPage> {
                             height: 50,
                             width: 250,
                             child: TextFormField(
+                              controller: firstLineMounthAmount,
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder())),
                           ),
@@ -247,6 +279,7 @@ class _staffPageState extends State<staffPage> {
                             height: 50,
                             width: 250,
                             child: TextFormField(
+                              controller: secondLineJob,
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder())),
                           ),
@@ -259,6 +292,7 @@ class _staffPageState extends State<staffPage> {
                             height: 50,
                             width: 250,
                             child: TextFormField(
+                              controller: secondLineBidAmount,
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder())),
                           ),
@@ -271,6 +305,7 @@ class _staffPageState extends State<staffPage> {
                             height: 50,
                             width: 250,
                             child: TextFormField(
+                              controller: secondLineTax,
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder())),
                           ),
@@ -283,6 +318,7 @@ class _staffPageState extends State<staffPage> {
                             height: 50,
                             width: 250,
                             child: TextFormField(
+                              controller: secondLineSalary,
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder())),
                           ),
@@ -295,6 +331,7 @@ class _staffPageState extends State<staffPage> {
                             height: 50,
                             width: 250,
                             child: TextFormField(
+                              controller: secondLineMounthAmount,
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder())),
                           ),
@@ -321,6 +358,7 @@ class _staffPageState extends State<staffPage> {
                             height: 50,
                             width: 250,
                             child: TextFormField(
+                              controller: thirdLineJob,
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder())),
                           ),
@@ -333,6 +371,7 @@ class _staffPageState extends State<staffPage> {
                             height: 50,
                             width: 250,
                             child: TextFormField(
+                              controller: thirdLineBidAmount,
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder())),
                           ),
@@ -345,6 +384,7 @@ class _staffPageState extends State<staffPage> {
                             height: 50,
                             width: 250,
                             child: TextFormField(
+                              controller: thirdLineTax,
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder())),
                           ),
@@ -357,6 +397,7 @@ class _staffPageState extends State<staffPage> {
                             height: 50,
                             width: 250,
                             child: TextFormField(
+                              controller: thirdLineSalary,
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder())),
                           ),
@@ -369,6 +410,7 @@ class _staffPageState extends State<staffPage> {
                             height: 50,
                             width: 250,
                             child: TextFormField(
+                              controller: thirdLineMounthAmount,
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder())),
                           ),
@@ -395,6 +437,7 @@ class _staffPageState extends State<staffPage> {
                             height: 50,
                             width: 250,
                             child: TextFormField(
+                              controller: fourthLineJob,
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder())),
                           ),
@@ -407,6 +450,7 @@ class _staffPageState extends State<staffPage> {
                             height: 50,
                             width: 250,
                             child: TextFormField(
+                              controller: fourthLineBidAmount,
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder())),
                           ),
@@ -419,6 +463,7 @@ class _staffPageState extends State<staffPage> {
                             height: 50,
                             width: 250,
                             child: TextFormField(
+                              controller: fourthLineTax,
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder())),
                           ),
@@ -431,6 +476,7 @@ class _staffPageState extends State<staffPage> {
                             height: 50,
                             width: 250,
                             child: TextFormField(
+                              controller: fourthLineSalary,
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder())),
                           ),
@@ -443,6 +489,7 @@ class _staffPageState extends State<staffPage> {
                             height: 50,
                             width: 250,
                             child: TextFormField(
+                              controller: fourthLineMounthAmount,
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder())),
                           ),
@@ -467,6 +514,7 @@ class _staffPageState extends State<staffPage> {
                             height: 50,
                             width: 250,
                             child: TextFormField(
+                              controller: fifthLineJob,
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder())),
                           ),
@@ -479,6 +527,7 @@ class _staffPageState extends State<staffPage> {
                             height: 50,
                             width: 250,
                             child: TextFormField(
+                              controller: fifthLineBidAmount,
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder())),
                           ),
@@ -491,6 +540,7 @@ class _staffPageState extends State<staffPage> {
                             height: 50,
                             width: 250,
                             child: TextFormField(
+                              controller: fifthLineTax,
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder())),
                           ),
@@ -503,6 +553,7 @@ class _staffPageState extends State<staffPage> {
                             height: 50,
                             width: 250,
                             child: TextFormField(
+                              controller: fifthLineSalary,
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder())),
                           ),
@@ -515,6 +566,7 @@ class _staffPageState extends State<staffPage> {
                             height: 50,
                             width: 250,
                             child: TextFormField(
+                              controller: fifthLineMounthAmount,
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder())),
                           ),
@@ -540,6 +592,7 @@ class _staffPageState extends State<staffPage> {
                                   height: 50,
                                   width: 250,
                                   child: TextFormField(
+                                    controller: sixthLineJob,
                                       decoration: InputDecoration(
                                           border: OutlineInputBorder())),
                                 ),
@@ -552,6 +605,7 @@ class _staffPageState extends State<staffPage> {
                                   height: 50,
                                   width: 250,
                                   child: TextFormField(
+                                    controller: sixthLineBidAmount,
                                       decoration: InputDecoration(
                                           border: OutlineInputBorder())),
                                 ),
@@ -564,6 +618,7 @@ class _staffPageState extends State<staffPage> {
                                   height: 50,
                                   width: 250,
                                   child: TextFormField(
+                                    controller: sixthLineTax,
                                       decoration: InputDecoration(
                                           border: OutlineInputBorder())),
                                 ),
@@ -576,6 +631,7 @@ class _staffPageState extends State<staffPage> {
                                   height: 50,
                                   width: 250,
                                   child: TextFormField(
+                                    controller: sixthLineSalary,
                                       decoration: InputDecoration(
                                           border: OutlineInputBorder())),
                                 ),
@@ -588,6 +644,7 @@ class _staffPageState extends State<staffPage> {
                                   height: 50,
                                   width: 250,
                                   child: TextFormField(
+                                    controller: sixthLineMounthAmount,
                                       decoration: InputDecoration(
                                           border: OutlineInputBorder())),
                                 ),
