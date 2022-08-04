@@ -430,7 +430,7 @@ class _licensesNsoftwarePageState extends State<licensesNsoftwarePage> {
                               padding: EdgeInsets.only(right: 40),
                               child: OutlinedButton(
                                 onPressed: () {
-                                  Navigator.of(context).pushNamed('/staff',);
+                                  Navigator.of(context).pushNamed('/develop',);
                                 },
                                 child: Padding(
                                   padding: const EdgeInsets.all(8.0),

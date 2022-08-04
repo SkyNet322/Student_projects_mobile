@@ -13,6 +13,7 @@ class _dataInputState extends State<dataInput> {
   final _formKey = GlobalKey<FormState>();
   final name = TextEditingController();
   final guid = TextEditingController();
+  final type = TextEditingController();
   var isWeb = kIsWeb;
   final ButtonStyle buttonStyle = OutlinedButton.styleFrom(
     primary: Colors.white,
@@ -21,6 +22,18 @@ class _dataInputState extends State<dataInput> {
       color: Color(0xFF52647E),
     ),
   );
+
+  @override
+  void initState() {
+    super.initState();
+    type.text = "Существующая информационная система";
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -88,6 +101,7 @@ class _dataInputState extends State<dataInput> {
                         height: 10,
                       ),
                       TextField(
+                        controller: type,
                         readOnly: true,
                         decoration: InputDecoration(
                           labelText: 'Тип расчета',
@@ -110,13 +124,8 @@ class _dataInputState extends State<dataInput> {
                             onPressed: () {
                               if (_formKey.currentState!.validate()) {
 
-                                Navigator.of(context).pushNamed(
-                                  '/infrastructure',
-                                );
-
+                                Navigator.of(context).pushReplacementNamed('/infrastructure');
                                 print(name.value);
-
-
                                 print(guid.value);
                               }
                             },
@@ -175,6 +184,7 @@ class _dataInputState extends State<dataInput> {
                         height: 10,
                       ),
                       TextField(
+                        controller: type,
                         readOnly: true,
                         decoration: InputDecoration(
                           labelText: 'Тип расчета',

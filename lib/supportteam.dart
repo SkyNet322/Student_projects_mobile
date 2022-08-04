@@ -1,43 +1,43 @@
 import 'package:flutter/material.dart';
 
-class staffPage extends StatefulWidget {
-  const staffPage({Key? key}) : super(key: key);
+class supportPage extends StatefulWidget {
+  const supportPage({Key? key}) : super(key: key);
 
   @override
-  State<staffPage> createState() => _staffPageState();
+  State<supportPage> createState() => _supportPageState();
 }
 
-class _staffPageState extends State<staffPage> {
-  final TextEditingController firstLineJob = TextEditingController();
-  final TextEditingController firstLineBidAmount = TextEditingController();
-  final TextEditingController firstLineTax = TextEditingController();
-  final TextEditingController firstLineSalary = TextEditingController();
-  final TextEditingController firstLineMounthAmount = TextEditingController();
-  final TextEditingController secondLineJob = TextEditingController();
-  final TextEditingController secondLineBidAmount = TextEditingController();
-  final TextEditingController secondLineTax = TextEditingController();
-  final TextEditingController secondLineSalary = TextEditingController();
-  final TextEditingController secondLineMounthAmount = TextEditingController();
-  final TextEditingController thirdLineJob = TextEditingController();
-  final TextEditingController thirdLineBidAmount = TextEditingController();
-  final TextEditingController thirdLineTax = TextEditingController();
-  final TextEditingController thirdLineSalary = TextEditingController();
-  final TextEditingController thirdLineMounthAmount = TextEditingController();
-  final TextEditingController fourthLineJob = TextEditingController();
-  final TextEditingController fourthLineBidAmount = TextEditingController();
-  final TextEditingController fourthLineTax = TextEditingController();
-  final TextEditingController fourthLineSalary = TextEditingController();
-  final TextEditingController fourthLineMounthAmount = TextEditingController();
-  final TextEditingController fifthLineJob = TextEditingController();
-  final TextEditingController fifthLineBidAmount = TextEditingController();
-  final TextEditingController fifthLineTax = TextEditingController();
-  final TextEditingController fifthLineSalary = TextEditingController();
-  final TextEditingController fifthLineMounthAmount = TextEditingController();
-  final TextEditingController sixthLineJob = TextEditingController();
-  final TextEditingController sixthLineBidAmount = TextEditingController();
-  final TextEditingController sixthLineTax = TextEditingController();
-  final TextEditingController sixthLineSalary = TextEditingController();
-  final TextEditingController sixthLineMounthAmount = TextEditingController();
+class _supportPageState extends State<supportPage> {
+  final TextEditingController _firstLineJob = TextEditingController();
+  final TextEditingController _firstLineBidAmount = TextEditingController();
+  final TextEditingController _firstLineTax = TextEditingController();
+  final TextEditingController _firstLineSalary = TextEditingController();
+  final TextEditingController _firstLineMounthAmount = TextEditingController();
+  final TextEditingController _secondLineJob = TextEditingController();
+  final TextEditingController _secondLineBidAmount = TextEditingController();
+  final TextEditingController _secondLineTax = TextEditingController();
+  final TextEditingController _secondLineSalary = TextEditingController();
+  final TextEditingController _secondLineMounthAmount = TextEditingController();
+  final TextEditingController _thirdLineJob = TextEditingController();
+  final TextEditingController _thirdLineBidAmount = TextEditingController();
+  final TextEditingController _thirdLineTax = TextEditingController();
+  final TextEditingController _thirdLineSalary = TextEditingController();
+  final TextEditingController _thirdLineMounthAmount = TextEditingController();
+  final TextEditingController _fourthLineJob = TextEditingController();
+  final TextEditingController _fourthLineBidAmount = TextEditingController();
+  final TextEditingController _fourthLineTax = TextEditingController();
+  final TextEditingController _fourthLineSalary = TextEditingController();
+  final TextEditingController _fourthLineMounthAmount = TextEditingController();
+  final TextEditingController _fifthLineJob = TextEditingController();
+  final TextEditingController _fifthLineBidAmount = TextEditingController();
+  final TextEditingController _fifthLineTax = TextEditingController();
+  final TextEditingController _fifthLineSalary = TextEditingController();
+  final TextEditingController _fifthLineMounthAmount = TextEditingController();
+  final TextEditingController _sixthLineJob = TextEditingController();
+  final TextEditingController _sixthLineBidAmount = TextEditingController();
+  final TextEditingController _sixthLineTax = TextEditingController();
+  final TextEditingController _sixthLineSalary = TextEditingController();
+  final TextEditingController _sixthLineMounthAmount = TextEditingController();
 
   bool visibilityTableRow = false;
 
@@ -90,7 +90,7 @@ class _staffPageState extends State<staffPage> {
                 padding: EdgeInsets.only(top: 10, bottom: 10),
                 child: Text(
                   textAlign: TextAlign.center,
-                  "Персонал",
+                  "Команда сопровождения",
                   style: TextStyle(color: Colors.black, fontSize: 20),
                 ),
                 decoration: BoxDecoration(
@@ -120,7 +120,7 @@ class _staffPageState extends State<staffPage> {
                           value: allVal,
                           onChanged: (value) {
                             setState(
-                              () {
+                                  () {
                                 allVal = !allVal;
                                 if (!allVal) {
                                   CheckVal1 = false;
@@ -200,7 +200,7 @@ class _staffPageState extends State<staffPage> {
                             height: 50,
                             width: 250,
                             child: TextFormField(
-                              controller: firstLineJob,
+                                controller: _firstLineJob,
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder())),
                           ),
@@ -213,7 +213,7 @@ class _staffPageState extends State<staffPage> {
                             height: 50,
                             width: 250,
                             child: TextFormField(
-                              controller: firstLineBidAmount,
+                                controller: _firstLineBidAmount,
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder())),
                           ),
@@ -226,7 +226,7 @@ class _staffPageState extends State<staffPage> {
                             height: 50,
                             width: 250,
                             child: TextFormField(
-                              controller: firstLineTax,
+                                controller: _firstLineTax,
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder())),
                           ),
@@ -239,7 +239,7 @@ class _staffPageState extends State<staffPage> {
                             height: 50,
                             width: 250,
                             child: TextFormField(
-                              controller: firstLineSalary,
+                                controller: _firstLineSalary,
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder())),
                           ),
@@ -252,7 +252,7 @@ class _staffPageState extends State<staffPage> {
                             height: 50,
                             width: 250,
                             child: TextFormField(
-                              controller: firstLineMounthAmount,
+                                controller: _firstLineMounthAmount,
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder())),
                           ),
@@ -279,7 +279,7 @@ class _staffPageState extends State<staffPage> {
                             height: 50,
                             width: 250,
                             child: TextFormField(
-                              controller: secondLineJob,
+                                controller: _secondLineJob,
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder())),
                           ),
@@ -292,7 +292,7 @@ class _staffPageState extends State<staffPage> {
                             height: 50,
                             width: 250,
                             child: TextFormField(
-                              controller: secondLineBidAmount,
+                                controller: _secondLineBidAmount,
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder())),
                           ),
@@ -305,7 +305,7 @@ class _staffPageState extends State<staffPage> {
                             height: 50,
                             width: 250,
                             child: TextFormField(
-                              controller: secondLineTax,
+                                controller: _secondLineTax,
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder())),
                           ),
@@ -318,7 +318,7 @@ class _staffPageState extends State<staffPage> {
                             height: 50,
                             width: 250,
                             child: TextFormField(
-                              controller: secondLineSalary,
+                                controller: _secondLineSalary,
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder())),
                           ),
@@ -331,7 +331,7 @@ class _staffPageState extends State<staffPage> {
                             height: 50,
                             width: 250,
                             child: TextFormField(
-                              controller: secondLineMounthAmount,
+                                controller: _secondLineMounthAmount,
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder())),
                           ),
@@ -358,7 +358,7 @@ class _staffPageState extends State<staffPage> {
                             height: 50,
                             width: 250,
                             child: TextFormField(
-                              controller: thirdLineJob,
+                                controller: _thirdLineJob,
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder())),
                           ),
@@ -371,7 +371,7 @@ class _staffPageState extends State<staffPage> {
                             height: 50,
                             width: 250,
                             child: TextFormField(
-                              controller: thirdLineBidAmount,
+                                controller: _thirdLineBidAmount,
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder())),
                           ),
@@ -384,7 +384,7 @@ class _staffPageState extends State<staffPage> {
                             height: 50,
                             width: 250,
                             child: TextFormField(
-                              controller: thirdLineTax,
+                                controller: _thirdLineTax,
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder())),
                           ),
@@ -397,7 +397,7 @@ class _staffPageState extends State<staffPage> {
                             height: 50,
                             width: 250,
                             child: TextFormField(
-                              controller: thirdLineSalary,
+                                controller: _thirdLineSalary,
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder())),
                           ),
@@ -410,7 +410,7 @@ class _staffPageState extends State<staffPage> {
                             height: 50,
                             width: 250,
                             child: TextFormField(
-                              controller: thirdLineMounthAmount,
+                                controller: _thirdLineMounthAmount,
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder())),
                           ),
@@ -437,7 +437,7 @@ class _staffPageState extends State<staffPage> {
                             height: 50,
                             width: 250,
                             child: TextFormField(
-                              controller: fourthLineJob,
+                                controller: _fourthLineJob,
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder())),
                           ),
@@ -450,7 +450,7 @@ class _staffPageState extends State<staffPage> {
                             height: 50,
                             width: 250,
                             child: TextFormField(
-                              controller: fourthLineBidAmount,
+                                controller: _fourthLineBidAmount,
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder())),
                           ),
@@ -463,7 +463,7 @@ class _staffPageState extends State<staffPage> {
                             height: 50,
                             width: 250,
                             child: TextFormField(
-                              controller: fourthLineTax,
+                                controller: _fourthLineTax,
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder())),
                           ),
@@ -476,7 +476,7 @@ class _staffPageState extends State<staffPage> {
                             height: 50,
                             width: 250,
                             child: TextFormField(
-                              controller: fourthLineSalary,
+                                controller: _fourthLineSalary,
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder())),
                           ),
@@ -489,7 +489,7 @@ class _staffPageState extends State<staffPage> {
                             height: 50,
                             width: 250,
                             child: TextFormField(
-                              controller: fourthLineMounthAmount,
+                                controller: _fourthLineMounthAmount,
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder())),
                           ),
@@ -514,7 +514,7 @@ class _staffPageState extends State<staffPage> {
                             height: 50,
                             width: 250,
                             child: TextFormField(
-                              controller: fifthLineJob,
+                                controller: _fifthLineJob,
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder())),
                           ),
@@ -527,7 +527,7 @@ class _staffPageState extends State<staffPage> {
                             height: 50,
                             width: 250,
                             child: TextFormField(
-                              controller: fifthLineBidAmount,
+                                controller: _fifthLineBidAmount,
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder())),
                           ),
@@ -540,7 +540,7 @@ class _staffPageState extends State<staffPage> {
                             height: 50,
                             width: 250,
                             child: TextFormField(
-                              controller: fifthLineTax,
+                                controller: _fifthLineTax,
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder())),
                           ),
@@ -553,7 +553,7 @@ class _staffPageState extends State<staffPage> {
                             height: 50,
                             width: 250,
                             child: TextFormField(
-                              controller: fifthLineSalary,
+                                controller: _fifthLineSalary,
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder())),
                           ),
@@ -566,7 +566,7 @@ class _staffPageState extends State<staffPage> {
                             height: 50,
                             width: 250,
                             child: TextFormField(
-                              controller: fifthLineMounthAmount,
+                                controller: _fifthLineMounthAmount,
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder())),
                           ),
@@ -576,90 +576,90 @@ class _staffPageState extends State<staffPage> {
                   ),
                   visibilityTableRow
                       ? TableRow(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(20.0),
-                              child: Checkbox(
-                                  value: CheckVal6,
-                                  onChanged: (value) {
-                                    setState(() => CheckVal6 = !CheckVal6);
-                                  }),
-                            ),
-                            Center(
-                              child: Padding(
-                                padding: const EdgeInsets.all(15.0),
-                                child: SizedBox(
-                                  height: 50,
-                                  width: 250,
-                                  child: TextFormField(
-                                    controller: sixthLineJob,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder())),
-                                ),
-                              ),
-                            ),
-                            Center(
-                              child: Padding(
-                                padding: const EdgeInsets.all(15.0),
-                                child: SizedBox(
-                                  height: 50,
-                                  width: 250,
-                                  child: TextFormField(
-                                    controller: sixthLineBidAmount,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder())),
-                                ),
-                              ),
-                            ),
-                            Center(
-                              child: Padding(
-                                padding: const EdgeInsets.all(15.0),
-                                child: SizedBox(
-                                  height: 50,
-                                  width: 250,
-                                  child: TextFormField(
-                                    controller: sixthLineTax,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder())),
-                                ),
-                              ),
-                            ),
-                            Center(
-                              child: Padding(
-                                padding: const EdgeInsets.all(15.0),
-                                child: SizedBox(
-                                  height: 50,
-                                  width: 250,
-                                  child: TextFormField(
-                                    controller: sixthLineSalary,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder())),
-                                ),
-                              ),
-                            ),
-                            Center(
-                              child: Padding(
-                                padding: const EdgeInsets.all(15.0),
-                                child: SizedBox(
-                                  height: 50,
-                                  width: 250,
-                                  child: TextFormField(
-                                    controller: sixthLineMounthAmount,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder())),
-                                ),
-                              ),
-                            ),
-                          ],
-                        )
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: Checkbox(
+                            value: CheckVal6,
+                            onChanged: (value) {
+                              setState(() => CheckVal6 = !CheckVal6);
+                            }),
+                      ),
+                      Center(
+                        child: Padding(
+                          padding: const EdgeInsets.all(15.0),
+                          child: SizedBox(
+                            height: 50,
+                            width: 250,
+                            child: TextFormField(
+                                controller: _sixthLineJob,
+                                decoration: InputDecoration(
+                                    border: OutlineInputBorder())),
+                          ),
+                        ),
+                      ),
+                      Center(
+                        child: Padding(
+                          padding: const EdgeInsets.all(15.0),
+                          child: SizedBox(
+                            height: 50,
+                            width: 250,
+                            child: TextFormField(
+                                controller: _sixthLineBidAmount,
+                                decoration: InputDecoration(
+                                    border: OutlineInputBorder())),
+                          ),
+                        ),
+                      ),
+                      Center(
+                        child: Padding(
+                          padding: const EdgeInsets.all(15.0),
+                          child: SizedBox(
+                            height: 50,
+                            width: 250,
+                            child: TextFormField(
+                                controller: _sixthLineTax,
+                                decoration: InputDecoration(
+                                    border: OutlineInputBorder())),
+                          ),
+                        ),
+                      ),
+                      Center(
+                        child: Padding(
+                          padding: const EdgeInsets.all(15.0),
+                          child: SizedBox(
+                            height: 50,
+                            width: 250,
+                            child: TextFormField(
+                                controller: _sixthLineSalary,
+                                decoration: InputDecoration(
+                                    border: OutlineInputBorder())),
+                          ),
+                        ),
+                      ),
+                      Center(
+                        child: Padding(
+                          padding: const EdgeInsets.all(15.0),
+                          child: SizedBox(
+                            height: 50,
+                            width: 250,
+                            child: TextFormField(
+                                controller: _sixthLineMounthAmount,
+                                decoration: InputDecoration(
+                                    border: OutlineInputBorder())),
+                          ),
+                        ),
+                      ),
+                    ],
+                  )
                       : TableRow(children: [
-                          Container(),
-                          Container(),
-                          Container(),
-                          Container(),
-                          Container(),
-                          Container(),
-                        ])
+                    Container(),
+                    Container(),
+                    Container(),
+                    Container(),
+                    Container(),
+                    Container(),
+                  ])
                 ],
               ),
               SizedBox(

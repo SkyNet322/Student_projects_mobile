@@ -3,7 +3,9 @@ import 'package:tco_calculator/authorization.dart';
 import 'package:tco_calculator/datainput.dart';
 import 'package:tco_calculator/infrastructure.dart';
 import 'package:tco_calculator/licensesNsoftware.dart';
-import 'package:tco_calculator/staff.dart';
+import 'package:tco_calculator/developteam.dart';
+import 'package:tco_calculator/supportteam.dart';
+import 'package:tco_calculator/calculation.dart';
 
 
 void main() {
@@ -26,7 +28,9 @@ class MyApp extends StatelessWidget {
         '/datainput': (context) => dataInput(),
         '/infrastructure' : (context) => infrastructurePage(),
         '/licNsoft' : (context) => licensesNsoftwarePage(),
-        '/staff' : (context) => staffPage(),
+        '/develop' : (context) => developPage(),
+        '/support' : (context) => supportPage(),
+        '/calculation':(context) => CalculationPage(),
       },
     );
   }
