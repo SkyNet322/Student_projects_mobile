@@ -1,6 +1,11 @@
+import 'dart:convert';
+
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/services.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:tco_calculator/models/calculate_model.dart';
+
 
 class CalculationPage extends StatefulWidget {
   const CalculationPage({Key? key}) : super(key: key);
@@ -14,6 +19,9 @@ class _CalculationPageState extends State<CalculationPage> {
   final _formKey = GlobalKey<FormState>();
   var isWeb = kIsWeb;
   bool tmp = false;
+  final tokenbox = Hive.box("token_box");
+  var token;
+  Calculate? calc;
   final ButtonStyle buttonStyle = OutlinedButton.styleFrom(
     primary: Colors.white,
     backgroundColor: Color(0xFF52647E),
@@ -21,10 +29,34 @@ class _CalculationPageState extends State<CalculationPage> {
       color: Color(0xFF52647E),
     ),
   );
+  Future<Calculate?> calculate(var token) async {
+    var apiURL = 'http://localhost/api/calculate';
+    //var apiURL = 'http://78.107.209.48/api/login';
+    try {
+      Response response = await Dio().get(
+        apiURL,
+        options: Options(
+          headers: {"Authorization": "Bearer $token"},
+        ),
+      );
+      if(response.statusCode == 200){
+        print(response.data);
+        final jsonResponse = json.decode(response.data);
+        calc = new Calculate.fromJson(jsonResponse);
+        return calc;
+      }
+    } catch (e) {
+      print("error");
+      return null;
+    }
+    return null;
+  }
 
   @override
   void initState() {
     super.initState();
+    token = tokenbox.getAt(0);
+
   }
 
   @override
@@ -341,7 +373,11 @@ class _CalculationPageState extends State<CalculationPage> {
                             Padding(
                               padding: EdgeInsets.only(right: 40),
                               child: OutlinedButton.icon(
-                                onPressed: () {},
+                                onPressed: () {
+                                  calculate(token);
+                                  print(token);
+                                 // print(calc!.inflic![0].year1);
+                                },
                                 icon: Icon(Icons.download,size:15),
                                 label: Text(
                                   "Скачать файл",

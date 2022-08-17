@@ -1,4 +1,6 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 class developPage extends StatefulWidget {
   const developPage({Key? key}) : super(key: key);
@@ -49,6 +51,7 @@ class _developPageState extends State<developPage> {
     setState(() => visibilityTableRow = false);
   }
 
+  final myBox = Hive.box('infra_box');
   bool allVal = false;
   bool CheckVal1 = false;
   bool CheckVal2 = false;
@@ -56,6 +59,72 @@ class _developPageState extends State<developPage> {
   bool CheckVal4 = false;
   bool CheckVal5 = false;
   bool CheckVal6 = false;
+
+  Future _saveData() async {
+    Map<dynamic, dynamic>? dev1;
+    Map<dynamic, dynamic>? dev2;
+    Map<dynamic, dynamic>? dev3;
+    Map<dynamic, dynamic>? dev4;
+    Map<dynamic, dynamic>? dev5;
+    Map<dynamic, dynamic>? dev6;
+    List<Map<dynamic, dynamic>> devlist = [];
+    if (CheckVal1 != false) {
+      dev1 = {
+        "post": _firstLineJob.text,
+        "quantity_of_the_rate": _firstLineBidAmount.text,
+        "unified_social_tax": _firstLineTax.text,
+        "wage": _firstLineSalary.text,
+        "number_of_month_of_work": _firstLineMounthAmount.text
+      };
+      devlist.add(dev1);
+    }if (CheckVal2 != false) {
+      dev2 = {
+        "post": _secondLineJob.text,
+        "quantity_of_the_rate": _secondLineBidAmount.text,
+        "unified_social_tax": _secondLineTax.text,
+        "wage": _secondLineSalary.text,
+        "number_of_month_of_work": _secondLineMounthAmount.text
+      };
+      devlist.add(dev2);
+    }  if (CheckVal3 != false) {
+      dev3 = {
+        "post": _thirdLineJob.text,
+        "quantity_of_the_rate": _thirdLineBidAmount.text,
+        "unified_social_tax": _thirdLineTax.text,
+        "wage": _thirdLineSalary.text,
+        "number_of_month_of_work": _thirdLineMounthAmount.text
+      };
+      devlist.add(dev3);
+    }  if (CheckVal4 != false) {
+      dev4 = {
+        "post": _fourthLineJob.text,
+        "quantity_of_the_rate": _fourthLineBidAmount.text,
+        "unified_social_tax": _fourthLineTax.text,
+        "wage": _fourthLineSalary.text,
+        "number_of_month_of_work": _fourthLineMounthAmount.text
+      };
+      devlist.add(dev4);
+    }  if (CheckVal5 != false) {
+      dev5 = {
+        "post": _fifthLineJob.text,
+        "quantity_of_the_rate": _fifthLineBidAmount.text,
+        "unified_social_tax": _fifthLineTax.text,
+        "wage": _fifthLineSalary.text,
+        "number_of_month_of_work": _fifthLineMounthAmount.text
+      };
+      devlist.add(dev5);
+    }  if (CheckVal6 != false) {
+      dev6 = {
+        "post": _sixthLineJob.text,
+        "quantity_of_the_rate": _sixthLineBidAmount.text,
+        "unified_social_tax": _sixthLineTax.text,
+        "wage": _sixthLineSalary.text,
+        "number_of_month_of_work": _sixthLineMounthAmount.text
+      };
+      devlist.add(dev6);
+    }
+    await myBox.put('devteam', devlist);
+  }
 
   final ButtonStyle buttonStyle = OutlinedButton.styleFrom(
     primary: Colors.white,
@@ -200,7 +269,7 @@ class _developPageState extends State<developPage> {
                             height: 50,
                             width: 250,
                             child: TextFormField(
-                              controller: _firstLineJob,
+                                controller: _firstLineJob,
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder())),
                           ),
@@ -213,7 +282,7 @@ class _developPageState extends State<developPage> {
                             height: 50,
                             width: 250,
                             child: TextFormField(
-                              controller: _firstLineBidAmount,
+                                controller: _firstLineBidAmount,
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder())),
                           ),
@@ -226,7 +295,7 @@ class _developPageState extends State<developPage> {
                             height: 50,
                             width: 250,
                             child: TextFormField(
-                              controller: _firstLineTax,
+                                controller: _firstLineTax,
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder())),
                           ),
@@ -239,7 +308,7 @@ class _developPageState extends State<developPage> {
                             height: 50,
                             width: 250,
                             child: TextFormField(
-                              controller: _firstLineSalary,
+                                controller: _firstLineSalary,
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder())),
                           ),
@@ -252,7 +321,7 @@ class _developPageState extends State<developPage> {
                             height: 50,
                             width: 250,
                             child: TextFormField(
-                              controller: _firstLineMounthAmount,
+                                controller: _firstLineMounthAmount,
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder())),
                           ),
@@ -279,7 +348,7 @@ class _developPageState extends State<developPage> {
                             height: 50,
                             width: 250,
                             child: TextFormField(
-                              controller: _secondLineJob,
+                                controller: _secondLineJob,
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder())),
                           ),
@@ -292,7 +361,7 @@ class _developPageState extends State<developPage> {
                             height: 50,
                             width: 250,
                             child: TextFormField(
-                              controller: _secondLineBidAmount,
+                                controller: _secondLineBidAmount,
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder())),
                           ),
@@ -305,7 +374,7 @@ class _developPageState extends State<developPage> {
                             height: 50,
                             width: 250,
                             child: TextFormField(
-                              controller: _secondLineTax,
+                                controller: _secondLineTax,
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder())),
                           ),
@@ -318,7 +387,7 @@ class _developPageState extends State<developPage> {
                             height: 50,
                             width: 250,
                             child: TextFormField(
-                              controller: _secondLineSalary,
+                                controller: _secondLineSalary,
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder())),
                           ),
@@ -331,7 +400,7 @@ class _developPageState extends State<developPage> {
                             height: 50,
                             width: 250,
                             child: TextFormField(
-                              controller: _secondLineMounthAmount,
+                                controller: _secondLineMounthAmount,
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder())),
                           ),
@@ -358,7 +427,7 @@ class _developPageState extends State<developPage> {
                             height: 50,
                             width: 250,
                             child: TextFormField(
-                              controller: _thirdLineJob,
+                                controller: _thirdLineJob,
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder())),
                           ),
@@ -371,7 +440,7 @@ class _developPageState extends State<developPage> {
                             height: 50,
                             width: 250,
                             child: TextFormField(
-                              controller: _thirdLineBidAmount,
+                                controller: _thirdLineBidAmount,
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder())),
                           ),
@@ -384,7 +453,7 @@ class _developPageState extends State<developPage> {
                             height: 50,
                             width: 250,
                             child: TextFormField(
-                              controller: _thirdLineTax,
+                                controller: _thirdLineTax,
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder())),
                           ),
@@ -397,7 +466,7 @@ class _developPageState extends State<developPage> {
                             height: 50,
                             width: 250,
                             child: TextFormField(
-                              controller: _thirdLineSalary,
+                                controller: _thirdLineSalary,
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder())),
                           ),
@@ -410,7 +479,7 @@ class _developPageState extends State<developPage> {
                             height: 50,
                             width: 250,
                             child: TextFormField(
-                              controller: _thirdLineMounthAmount,
+                                controller: _thirdLineMounthAmount,
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder())),
                           ),
@@ -437,7 +506,7 @@ class _developPageState extends State<developPage> {
                             height: 50,
                             width: 250,
                             child: TextFormField(
-                              controller: _fourthLineJob,
+                                controller: _fourthLineJob,
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder())),
                           ),
@@ -450,7 +519,7 @@ class _developPageState extends State<developPage> {
                             height: 50,
                             width: 250,
                             child: TextFormField(
-                              controller: _fourthLineBidAmount,
+                                controller: _fourthLineBidAmount,
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder())),
                           ),
@@ -463,7 +532,7 @@ class _developPageState extends State<developPage> {
                             height: 50,
                             width: 250,
                             child: TextFormField(
-                              controller: _fourthLineTax,
+                                controller: _fourthLineTax,
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder())),
                           ),
@@ -476,7 +545,7 @@ class _developPageState extends State<developPage> {
                             height: 50,
                             width: 250,
                             child: TextFormField(
-                              controller: _fourthLineSalary,
+                                controller: _fourthLineSalary,
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder())),
                           ),
@@ -489,7 +558,7 @@ class _developPageState extends State<developPage> {
                             height: 50,
                             width: 250,
                             child: TextFormField(
-                              controller: _fourthLineMounthAmount,
+                                controller: _fourthLineMounthAmount,
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder())),
                           ),
@@ -514,7 +583,7 @@ class _developPageState extends State<developPage> {
                             height: 50,
                             width: 250,
                             child: TextFormField(
-                              controller: _fifthLineJob,
+                                controller: _fifthLineJob,
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder())),
                           ),
@@ -527,7 +596,7 @@ class _developPageState extends State<developPage> {
                             height: 50,
                             width: 250,
                             child: TextFormField(
-                              controller: _fifthLineBidAmount,
+                                controller: _fifthLineBidAmount,
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder())),
                           ),
@@ -540,7 +609,7 @@ class _developPageState extends State<developPage> {
                             height: 50,
                             width: 250,
                             child: TextFormField(
-                              controller: _fifthLineTax,
+                                controller: _fifthLineTax,
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder())),
                           ),
@@ -553,7 +622,7 @@ class _developPageState extends State<developPage> {
                             height: 50,
                             width: 250,
                             child: TextFormField(
-                              controller: _fifthLineSalary,
+                                controller: _fifthLineSalary,
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder())),
                           ),
@@ -566,7 +635,7 @@ class _developPageState extends State<developPage> {
                             height: 50,
                             width: 250,
                             child: TextFormField(
-                              controller: _fifthLineMounthAmount,
+                                controller: _fifthLineMounthAmount,
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder())),
                           ),
@@ -592,7 +661,7 @@ class _developPageState extends State<developPage> {
                                   height: 50,
                                   width: 250,
                                   child: TextFormField(
-                                    controller: _sixthLineJob,
+                                      controller: _sixthLineJob,
                                       decoration: InputDecoration(
                                           border: OutlineInputBorder())),
                                 ),
@@ -605,7 +674,7 @@ class _developPageState extends State<developPage> {
                                   height: 50,
                                   width: 250,
                                   child: TextFormField(
-                                    controller: _sixthLineBidAmount,
+                                      controller: _sixthLineBidAmount,
                                       decoration: InputDecoration(
                                           border: OutlineInputBorder())),
                                 ),
@@ -618,7 +687,7 @@ class _developPageState extends State<developPage> {
                                   height: 50,
                                   width: 250,
                                   child: TextFormField(
-                                    controller: _sixthLineTax,
+                                      controller: _sixthLineTax,
                                       decoration: InputDecoration(
                                           border: OutlineInputBorder())),
                                 ),
@@ -631,7 +700,7 @@ class _developPageState extends State<developPage> {
                                   height: 50,
                                   width: 250,
                                   child: TextFormField(
-                                    controller: _sixthLineSalary,
+                                      controller: _sixthLineSalary,
                                       decoration: InputDecoration(
                                           border: OutlineInputBorder())),
                                 ),
@@ -644,7 +713,7 @@ class _developPageState extends State<developPage> {
                                   height: 50,
                                   width: 250,
                                   child: TextFormField(
-                                    controller: _sixthLineMounthAmount,
+                                      controller: _sixthLineMounthAmount,
                                       decoration: InputDecoration(
                                           border: OutlineInputBorder())),
                                 ),
@@ -700,6 +769,7 @@ class _developPageState extends State<developPage> {
                   ),
                   OutlinedButton(
                     onPressed: () {
+                      _saveData();
                       Navigator.of(context).pushNamed('/support');
                     },
                     child: Padding(

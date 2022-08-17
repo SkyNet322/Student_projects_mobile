@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:dio/dio.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+
 
 class AuthorizationPage extends StatefulWidget {
   @override
@@ -22,15 +24,17 @@ class AuthorizationPageState extends State<AuthorizationPage> {
     ),
   );
   var token;
+  final myBox = Hive.box('token_box');
 
   Future<String> loginApis(String user, String password) async {
-    var apiURL = 'http://78.107.209.48/api/login';
+    //var apiURL = 'http://37.145.168.238/api/login';
+    var apiURL = 'http://localhost/api/login';
+
     var formData = FormData.fromMap({
       'login': user,
       'password': password,
     });
     Dio dio = Dio();
-    dio.options.headers["Authorization"] = "Bearer ${token}";
     Response response;
     try {
       response = await dio.post(
@@ -39,42 +43,50 @@ class AuthorizationPageState extends State<AuthorizationPage> {
       );
       print("response data " + response.toString());
       if (response.data['token'] != null) {
-        Navigator.pushNamed(context, '/datainput');
         token = response.data['token'];
-       // HeaderAuth(token);
-        Fluttertoast.showToast(
-            msg: "Login Successful", backgroundColor: Colors.cyan);
-        print(response.headers['Authorization']);
+        saveToken(token);
+        HeaderAuth(token);
       }
     } catch (e) {
       Fluttertoast.showToast(
-          msg: "Error", backgroundColor: Colors.cyan);
+          msg: "Направильный логин или пароль", webBgColor: "#D7503C", webPosition: "center", timeInSecForIosWeb: 2 );
       return 'something wrong';
     }
     return '';
   }
-  // Future<String> HeaderAuth(var token) async {
-  //   var apiURL = 'http://78.107.209.48/api/login';
   //
-  //   Dio dio = Dio();
-  //
-  //   Response response;
-  //   try {
-  //     response = await dio.post(
-  //       apiURL,
-  //         options: Options(
-  //           headers: {"Authorization": "Bearer $token"},
-  //         ),
-  //     );
-  //
-  //     print(response.headers);
-  //
-  //     } catch (e) {
-  //
-  //     return 'something wrong';
-  //   }
-  //   return '';
-  // }
+  Future<String> HeaderAuth(var token) async {
+    //var apiURL = 'http://37.145.168.238/api/user';
+    var apiURL = 'http://localhost/api/user';
+
+    Dio dio = Dio();
+
+    Response response;
+    try {
+      response = await dio.get(
+        apiURL,
+        options: Options(
+          headers: {"Authorization": "Bearer $token"},
+        ),
+      );
+    if(response.statusCode == 200){
+      Navigator.pushNamed(context, '/datainput');
+      Fluttertoast.showToast(
+          msg: response.data.toString(), webPosition: "center", timeInSecForIosWeb: 2);
+    }else{
+      Fluttertoast.showToast(
+          msg: response.statusMessage.toString(), backgroundColor: Colors.cyan);
+    }
+      print(response.headers);
+
+    } catch (e) {
+
+      return 'something wrong';
+    }
+    return '';
+  }
+
+
 
   @override
   void initState() {
@@ -87,6 +99,11 @@ class AuthorizationPageState extends State<AuthorizationPage> {
     username.dispose();
     password.dispose();
   }
+
+  Future saveToken(String tmp) async{
+    await myBox.put('token', tmp);
+  }
+
 
   @override
   Widget build(BuildContext context) {

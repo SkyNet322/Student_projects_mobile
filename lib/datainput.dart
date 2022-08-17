@@ -1,7 +1,13 @@
+import 'dart:html';
+
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'dart:convert';
+import 'package:dropdown_search/dropdown_search.dart';
 
-
+import 'models/data_model.dart';
 class dataInput extends StatefulWidget {
   const dataInput({Key? key}) : super(key: key);
 
@@ -23,9 +29,34 @@ class _dataInputState extends State<dataInput> {
     ),
   );
 
+  final myBox = Hive.box('token_box');
+  var token;
+  Future<String> getGUID(var token) async {
+      var apiURL = 'http://localhost/api/getguid';
+      //var apiURL = 'http://78.107.209.48/api/login';
+      Dio dio = Dio();
+
+      Response response;
+      try {
+        response = await dio.get(
+          apiURL,
+            options: Options(
+              headers: {"Authorization": "Bearer $token"},
+            ),
+        );
+        } catch (e) {
+        return 'something wrong';
+      }
+      return '';
+    }
+
+
   @override
   void initState() {
+    //HeaderAuth(token);
+
     super.initState();
+    token = myBox.getAt(0);
     type.text = "Существующая информационная система";
   }
 
@@ -64,41 +95,64 @@ class _dataInputState extends State<dataInput> {
                   color: Color(0xFF52647E),
                   child: Text("Введите данные", style: TextStyle(color: Colors.white), textAlign: TextAlign.center),
                 ),*/
-                      TextFormField(
-                        controller: name,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return '* Необходимо заполнить данное поле';
-                          }
-                          return null;
-                        },
-                        decoration: InputDecoration(
-                          labelText: 'Введите название ИС',
+                      // TextFormField(
+                      //   controller: name,
+                      //   validator: (value) {
+                      //     if (value == null || value.isEmpty) {
+                      //       return '* Необходимо заполнить данное поле';
+                      //     }
+                      //     return null;
+                      //   },
+                      //   decoration: InputDecoration(
+                      //     labelText: 'Введите название или GUID ИС',
+                      //     border: OutlineInputBorder(
+                      //       borderRadius: BorderRadius.circular(10),
+                      //     ),
+                      //   ),
+                      // ),
+                      // SizedBox(
+                      //   height: 20,
+                      // ),
+                      DropdownSearch<DataModel>(
+
+                        popupProps: PopupProps.menu(
+                          showSearchBox: true,
+
+                          menuProps: MenuProps(
+                            backgroundColor: Color(0xFFD7D7D7),
+                            borderRadius: BorderRadius.circular(10),
+                            shadowColor: Colors.blueGrey,
+                          ),
+                        ),
+                        dropdownDecoratorProps: DropDownDecoratorProps(dropdownSearchDecoration: InputDecoration(
+                          labelText: 'Введите название или GUID ИС',
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10),
                           ),
                         ),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      TextFormField(
-                        controller: guid,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return '* Необходимо заполнить данное поле';
+                        ),
+                        asyncItems: (String filter) async {
+                          var response = await Dio().get(
+                            "http://localhost/api/getguid",
+                            options: Options(
+                              headers: {"Authorization": "Bearer $token"},
+                            ),
+                          );
+                          var models = DataModel.fromJsonList(response.data);
+                          return models;
+                        },
+                        validator:(item){
+                          if(item == null){
+                            return "* Необходимо заполнить данное поле";
                           }
                           return null;
+                        } ,
+                        onChanged: (DataModel? data) {
+                          print(data?.id);
                         },
-                        decoration: InputDecoration(
-                          labelText: 'Введите GUID ИС',
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                        ),
                       ),
                       SizedBox(
-                        height: 10,
+                        height: 20,
                       ),
                       TextField(
                         controller: type,
@@ -123,10 +177,10 @@ class _dataInputState extends State<dataInput> {
                             style: buttonStyle,
                             onPressed: () {
                               if (_formKey.currentState!.validate()) {
-
+                                print(myBox.getAt(0));
                                 Navigator.of(context).pushReplacementNamed('/infrastructure');
-                                print(name.value);
-                                print(guid.value);
+                               // print(name.value);
+                               // print(guid.value);
                               }
                             },
                             child: Text("Расчет"),
@@ -156,25 +210,7 @@ class _dataInputState extends State<dataInput> {
                           return null;
                         },
                         decoration: InputDecoration(
-                          labelText: 'Введите название ИС',
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      TextFormField(
-                        controller: guid,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return '* Необходимо заполнить данное поле';
-                          }
-                          return null;
-                        },
-                        decoration: InputDecoration(
-                          labelText: 'Введите GUID ИС',
+                          labelText: 'Введите название или GUID ИС',
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10),
                           ),
@@ -206,9 +242,7 @@ class _dataInputState extends State<dataInput> {
                             style: buttonStyle,
                             onPressed: () {
                               if (_formKey.currentState!.validate()) {
-
                               }
-
                                 print(name.value);
                                 print(guid.value);
                             },

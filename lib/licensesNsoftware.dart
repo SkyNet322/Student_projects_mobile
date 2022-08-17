@@ -1,6 +1,8 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 class licensesNsoftwarePage extends StatefulWidget {
   const licensesNsoftwarePage({Key? key}) : super(key: key);
@@ -27,6 +29,7 @@ class _licensesNsoftwarePageState extends State<licensesNsoftwarePage> {
   final outsourceTotalCostFifthYear = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   var isWeb = kIsWeb;
+  final myBox = Hive.box('infra_box');
   bool tmp = false;
   final ButtonStyle buttonStyle = OutlinedButton.styleFrom(
     primary: Colors.white,
@@ -35,6 +38,33 @@ class _licensesNsoftwarePageState extends State<licensesNsoftwarePage> {
       color: Color(0xFF52647E),
     ),
   );
+
+  Future _saveData() async{
+    Map<dynamic, dynamic> licen = {
+        "object1": {
+          "1year": licNsoftTotalCostFirstYear.text,
+          "2year": licNsoftTotalCostSecondYear.text,
+          "3year": licNsoftTotalCostThirdYear.text,
+          "4year": licNsoftTotalCostFourthYear.text,
+          "5year": licNsoftTotalCostFifthYear.text
+        },
+        "object2": {
+          "1year": supportTotalCostFirstYear.text,
+          "2year": supportTotalCostSecondYear.text,
+          "3year": supportTotalCostThirdYear.text,
+          "4year": supportTotalCostFourthYear.text,
+          "5year": supportTotalCostFifthYear.text
+        },
+        "object3": {
+          "1year": outsourceTotalCostFirstYear.text,
+          "2year": outsourceTotalCostSecondYear.text,
+          "3year": outsourceTotalCostThirdYear.text,
+          "4year": outsourceTotalCostFourthYear.text,
+          "5year": outsourceTotalCostFifthYear.text
+        }
+      };
+    await myBox.put('licen_form', licen);
+  }
 
   @override
   void initState() {
@@ -430,6 +460,7 @@ class _licensesNsoftwarePageState extends State<licensesNsoftwarePage> {
                               padding: EdgeInsets.only(right: 40),
                               child: OutlinedButton(
                                 onPressed: () {
+                                  _saveData();
                                   Navigator.of(context).pushNamed('/develop',);
                                 },
                                 child: Padding(

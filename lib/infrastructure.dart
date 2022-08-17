@@ -1,6 +1,10 @@
+import 'dart:convert';
+
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 class infrastructurePage extends StatefulWidget {
   const infrastructurePage({Key? key}) : super(key: key);
@@ -27,7 +31,9 @@ class _infrastructurePageState extends State<infrastructurePage> {
   final usingTotalCostFifthYear = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   var isWeb = kIsWeb;
-  bool tmp = false;
+  bool cloud = false;
+  final myBox = Hive.box('infra_box');
+
   final ButtonStyle buttonStyle = OutlinedButton.styleFrom(
     primary: Colors.white,
     backgroundColor: Color(0xFF52647E),
@@ -36,7 +42,34 @@ class _infrastructurePageState extends State<infrastructurePage> {
     ),
   );
 
-
+  Future _saveData() async {
+    var type = cloud ? "OPEX" : "CAPEX";
+    Map<dynamic, dynamic> infra = {
+      "type": type,
+      "object1": {
+        "1year": infrastructureTotalCostFirstYear.text,
+        "2year": infrastructureTotalCostSecondYear.text,
+        "3year": infrastructureTotalCostThirdYear.text,
+        "4year": infrastructureTotalCostFourthYear.text,
+        "5year": infrastructureTotalCostFifthYear.text
+      },
+      "object2": {
+        "1year": maintenanceTotalCostFirstYear.text,
+        "2year": maintenanceTotalCostSecondYear.text,
+        "3year": maintenanceTotalCostThirdYear.text,
+        "4year": maintenanceTotalCostFourthYear.text,
+        "5year": maintenanceTotalCostFifthYear.text
+      },
+      "object3": {
+        "1year": usingTotalCostFirstYear.text,
+        "2year": usingTotalCostSecondYear.text,
+        "3year": usingTotalCostThirdYear.text,
+        "4year": usingTotalCostFourthYear.text,
+        "5year": usingTotalCostFifthYear.text
+      }
+    };
+    await myBox.put('infra_form', infra);
+  }
 
   @override
   void initState() {
@@ -190,7 +223,8 @@ class _infrastructurePageState extends State<infrastructurePage> {
                                 Column(
                                   children: [
                                     Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
                                       children: [
                                         SizedBox(),
                                         IconButton(
@@ -198,10 +232,10 @@ class _infrastructurePageState extends State<infrastructurePage> {
                                           alignment: Alignment.topRight,
                                           splashRadius: 2,
                                           onPressed: () {
-                                            setState(() => tmp = !tmp);
+                                            setState(() => cloud = !cloud);
                                           },
                                           icon: Icon(
-                                            tmp
+                                            cloud
                                                 ? Icons.cloud_done
                                                 : Icons.cloud_outlined,
                                           ),
@@ -211,7 +245,7 @@ class _infrastructurePageState extends State<infrastructurePage> {
                                     Row(
                                       children: [
                                         Expanded(
-                                          child: tmp
+                                          child: cloud
                                               ? Text(
                                                   textAlign: TextAlign.center,
                                                   "Стоимость инфраструктуры (облачная)",
@@ -221,14 +255,15 @@ class _infrastructurePageState extends State<infrastructurePage> {
                                                   "Стоимость инфраструктуры",
                                                 ),
                                         ),
-
                                       ],
                                     ),
-                                    SizedBox(height: 30,),
+                                    SizedBox(
+                                      height: 30,
+                                    ),
                                   ],
                                 ),
                                 Expanded(
-                                  child: tmp
+                                  child: cloud
                                       ? Text(
                                           textAlign: TextAlign.center,
                                           "OPEX",
@@ -473,7 +508,10 @@ class _infrastructurePageState extends State<infrastructurePage> {
                               padding: EdgeInsets.only(right: 40),
                               child: OutlinedButton(
                                 onPressed: () {
-                                  Navigator.of(context).pushNamed('/licNsoft',);
+                                  _saveData();
+                                  Navigator.of(context).pushNamed(
+                                    '/licNsoft',
+                                  );
                                 },
                                 child: Padding(
                                   padding: const EdgeInsets.all(8.0),

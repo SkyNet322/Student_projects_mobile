@@ -1,4 +1,8 @@
+import 'dart:convert';
+
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 class supportPage extends StatefulWidget {
   const supportPage({Key? key}) : super(key: key);
@@ -49,6 +53,9 @@ class _supportPageState extends State<supportPage> {
     setState(() => visibilityTableRow = false);
   }
 
+  final myBox = Hive.box('infra_box');
+  final tokenBox = Hive.box('token_box');
+  var token;
   bool allVal = false;
   bool CheckVal1 = false;
   bool CheckVal2 = false;
@@ -56,7 +63,136 @@ class _supportPageState extends State<supportPage> {
   bool CheckVal4 = false;
   bool CheckVal5 = false;
   bool CheckVal6 = false;
+  var formDatat;
 
+  Future<String> getAll(var token) async {
+    var apiURL = 'http://localhost/api/getall';
+    //var apiURL = 'http://78.107.209.48/api/login';
+    Dio dio = Dio();
+
+    Response response;
+    try {
+      response = await dio.post(
+        apiURL,
+        data: {
+          "inflics": {
+            "infra": myBox.get('infra_form'),
+            "licen": myBox.get('licen_form'),
+          },
+          "personnels": {
+            "development": myBox.get('devteam'),
+            "support": myBox.get('supteam'),
+          },
+        },
+        options: Options(
+          headers: {"Authorization": "Bearer $token"},
+        ),
+      );
+      if (response.statusCode == 200) {
+        print("OK");
+        print(response.data);
+      }
+    } catch (e) {
+      print(e);
+      return 'something wrong';
+    }
+    return '';
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    token = tokenBox.getAt(0);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
+  Future _saveData() async {
+    Map<dynamic, dynamic>? dev1;
+    Map<dynamic, dynamic>? dev2;
+    Map<dynamic, dynamic>? dev3;
+    Map<dynamic, dynamic>? dev4;
+    Map<dynamic, dynamic>? dev5;
+    Map<dynamic, dynamic>? dev6;
+    List<Map<dynamic, dynamic>> devlist = [];
+    if (CheckVal1 != false) {
+      dev1 = {
+        "post": _firstLineJob.text,
+        "quantity_of_the_rate": _firstLineBidAmount.text,
+        "unified_social_tax": _firstLineTax.text,
+        "wage": _firstLineSalary.text,
+        "number_of_month_of_work": _firstLineMounthAmount.text
+      };
+      devlist.add(dev1);
+    }
+    if (CheckVal2 != false) {
+      dev2 = {
+        "post": _secondLineJob.text,
+        "quantity_of_the_rate": _secondLineBidAmount.text,
+        "unified_social_tax": _secondLineTax.text,
+        "wage": _secondLineSalary.text,
+        "number_of_month_of_work": _secondLineMounthAmount.text
+      };
+      devlist.add(dev2);
+    }
+    if (CheckVal3 != false) {
+      dev3 = {
+        "post": _thirdLineJob.text,
+        "quantity_of_the_rate": _thirdLineBidAmount.text,
+        "unified_social_tax": _thirdLineTax.text,
+        "wage": _thirdLineSalary.text,
+        "number_of_month_of_work": _thirdLineMounthAmount.text
+      };
+      devlist.add(dev3);
+    }
+    if (CheckVal4 != false) {
+      dev4 = {
+        "post": _fourthLineJob.text,
+        "quantity_of_the_rate": _fourthLineBidAmount.text,
+        "unified_social_tax": _fourthLineTax.text,
+        "wage": _fourthLineSalary.text,
+        "number_of_month_of_work": _fourthLineMounthAmount.text
+      };
+      devlist.add(dev4);
+    }
+    if (CheckVal5 != false) {
+      dev5 = {
+        "post": _fifthLineJob.text,
+        "quantity_of_the_rate": _fifthLineBidAmount.text,
+        "unified_social_tax": _fifthLineTax.text,
+        "wage": _fifthLineSalary.text,
+        "number_of_month_of_work": _fifthLineMounthAmount.text
+      };
+      devlist.add(dev5);
+    }
+    if (CheckVal6 != false) {
+      dev6 = {
+        "post": _sixthLineJob.text,
+        "quantity_of_the_rate": _sixthLineBidAmount.text,
+        "unified_social_tax": _sixthLineTax.text,
+        "wage": _sixthLineSalary.text,
+        "number_of_month_of_work": _sixthLineMounthAmount.text
+      };
+      devlist.add(dev6);
+    }
+    await myBox.put('supteam', devlist);
+  }
+
+  // Future _formDat() async{
+  //   formDatat =
+  //   '{' + ""inflics"" +':'+
+  //   '{'+
+  //   myBox.get('infra_form')+
+  //   myBox.get('licen_form')+
+  //   "personnels" + ':' + '['+
+  //   myBox.get('devteam_form') +
+  //   myBox.get('supteam_form')+
+  //   ']'+
+  //   '}'+'}';
+  // }
   final ButtonStyle buttonStyle = OutlinedButton.styleFrom(
     primary: Colors.white,
     backgroundColor: Color(0xFF52647E),
@@ -120,7 +256,7 @@ class _supportPageState extends State<supportPage> {
                           value: allVal,
                           onChanged: (value) {
                             setState(
-                                  () {
+                              () {
                                 allVal = !allVal;
                                 if (!allVal) {
                                   CheckVal1 = false;
@@ -576,90 +712,90 @@ class _supportPageState extends State<supportPage> {
                   ),
                   visibilityTableRow
                       ? TableRow(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(20.0),
-                        child: Checkbox(
-                            value: CheckVal6,
-                            onChanged: (value) {
-                              setState(() => CheckVal6 = !CheckVal6);
-                            }),
-                      ),
-                      Center(
-                        child: Padding(
-                          padding: const EdgeInsets.all(15.0),
-                          child: SizedBox(
-                            height: 50,
-                            width: 250,
-                            child: TextFormField(
-                                controller: _sixthLineJob,
-                                decoration: InputDecoration(
-                                    border: OutlineInputBorder())),
-                          ),
-                        ),
-                      ),
-                      Center(
-                        child: Padding(
-                          padding: const EdgeInsets.all(15.0),
-                          child: SizedBox(
-                            height: 50,
-                            width: 250,
-                            child: TextFormField(
-                                controller: _sixthLineBidAmount,
-                                decoration: InputDecoration(
-                                    border: OutlineInputBorder())),
-                          ),
-                        ),
-                      ),
-                      Center(
-                        child: Padding(
-                          padding: const EdgeInsets.all(15.0),
-                          child: SizedBox(
-                            height: 50,
-                            width: 250,
-                            child: TextFormField(
-                                controller: _sixthLineTax,
-                                decoration: InputDecoration(
-                                    border: OutlineInputBorder())),
-                          ),
-                        ),
-                      ),
-                      Center(
-                        child: Padding(
-                          padding: const EdgeInsets.all(15.0),
-                          child: SizedBox(
-                            height: 50,
-                            width: 250,
-                            child: TextFormField(
-                                controller: _sixthLineSalary,
-                                decoration: InputDecoration(
-                                    border: OutlineInputBorder())),
-                          ),
-                        ),
-                      ),
-                      Center(
-                        child: Padding(
-                          padding: const EdgeInsets.all(15.0),
-                          child: SizedBox(
-                            height: 50,
-                            width: 250,
-                            child: TextFormField(
-                                controller: _sixthLineMounthAmount,
-                                decoration: InputDecoration(
-                                    border: OutlineInputBorder())),
-                          ),
-                        ),
-                      ),
-                    ],
-                  )
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(20.0),
+                              child: Checkbox(
+                                  value: CheckVal6,
+                                  onChanged: (value) {
+                                    setState(() => CheckVal6 = !CheckVal6);
+                                  }),
+                            ),
+                            Center(
+                              child: Padding(
+                                padding: const EdgeInsets.all(15.0),
+                                child: SizedBox(
+                                  height: 50,
+                                  width: 250,
+                                  child: TextFormField(
+                                      controller: _sixthLineJob,
+                                      decoration: InputDecoration(
+                                          border: OutlineInputBorder())),
+                                ),
+                              ),
+                            ),
+                            Center(
+                              child: Padding(
+                                padding: const EdgeInsets.all(15.0),
+                                child: SizedBox(
+                                  height: 50,
+                                  width: 250,
+                                  child: TextFormField(
+                                      controller: _sixthLineBidAmount,
+                                      decoration: InputDecoration(
+                                          border: OutlineInputBorder())),
+                                ),
+                              ),
+                            ),
+                            Center(
+                              child: Padding(
+                                padding: const EdgeInsets.all(15.0),
+                                child: SizedBox(
+                                  height: 50,
+                                  width: 250,
+                                  child: TextFormField(
+                                      controller: _sixthLineTax,
+                                      decoration: InputDecoration(
+                                          border: OutlineInputBorder())),
+                                ),
+                              ),
+                            ),
+                            Center(
+                              child: Padding(
+                                padding: const EdgeInsets.all(15.0),
+                                child: SizedBox(
+                                  height: 50,
+                                  width: 250,
+                                  child: TextFormField(
+                                      controller: _sixthLineSalary,
+                                      decoration: InputDecoration(
+                                          border: OutlineInputBorder())),
+                                ),
+                              ),
+                            ),
+                            Center(
+                              child: Padding(
+                                padding: const EdgeInsets.all(15.0),
+                                child: SizedBox(
+                                  height: 50,
+                                  width: 250,
+                                  child: TextFormField(
+                                      controller: _sixthLineMounthAmount,
+                                      decoration: InputDecoration(
+                                          border: OutlineInputBorder())),
+                                ),
+                              ),
+                            ),
+                          ],
+                        )
                       : TableRow(children: [
-                    Container(),
-                    Container(),
-                    Container(),
-                    Container(),
-                    Container(),
-                    Container(),
-                  ])
+                          Container(),
+                          Container(),
+                          Container(),
+                          Container(),
+                          Container(),
+                          Container(),
+                        ])
                 ],
               ),
               SizedBox(
@@ -699,7 +835,20 @@ class _supportPageState extends State<supportPage> {
                     ],
                   ),
                   OutlinedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      _saveData();
+                      //_formDat();
+                      getAll(token);
+                      print({
+                        "inflics": {
+                          "infra": myBox.get('infra_form'),
+                          "licen": myBox.get('licen_form'),
+                        },
+                        "personnels":
+                            myBox.get('devteam') + myBox.get('supteam'),
+                      });
+                      Navigator.of(context).pushNamed('/calculation');
+                    },
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text(

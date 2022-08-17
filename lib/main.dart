@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:tco_calculator/authorization.dart';
 import 'package:tco_calculator/datainput.dart';
 import 'package:tco_calculator/infrastructure.dart';
@@ -8,7 +9,13 @@ import 'package:tco_calculator/supportteam.dart';
 import 'package:tco_calculator/calculation.dart';
 
 
-void main() {
+
+Future<void> main() async {
+
+  await Hive.initFlutter();
+  await Hive.openBox('token_box');
+  await Hive.openBox('infra_box');
+  // await Hive.openBox('lic_box');
   runApp(const MyApp());
 }
 
