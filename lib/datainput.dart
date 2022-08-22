@@ -31,32 +31,13 @@ class _dataInputState extends State<dataInput> {
 
   final myBox = Hive.box('token_box');
   var token;
-  Future<String> getGUID(var token) async {
-      var apiURL = 'http://localhost/api/getguid';
-      //var apiURL = 'http://78.107.209.48/api/login';
-      Dio dio = Dio();
-
-      Response response;
-      try {
-        response = await dio.get(
-          apiURL,
-            options: Options(
-              headers: {"Authorization": "Bearer $token"},
-            ),
-        );
-        } catch (e) {
-        return 'something wrong';
-      }
-      return '';
-    }
-
 
   @override
   void initState() {
     //HeaderAuth(token);
 
     super.initState();
-    token = myBox.getAt(0);
+    token = myBox.get('token');
     type.text = "Существующая информационная система";
   }
 
@@ -133,7 +114,8 @@ class _dataInputState extends State<dataInput> {
                         ),
                         asyncItems: (String filter) async {
                           var response = await Dio().get(
-                            "http://localhost/api/getguid",
+                            "http://37.145.168.238/api/getguid",
+                            //"http://localhost/api/getguid",
                             options: Options(
                               headers: {"Authorization": "Bearer $token"},
                             ),
@@ -148,7 +130,7 @@ class _dataInputState extends State<dataInput> {
                           return null;
                         } ,
                         onChanged: (DataModel? data) {
-                          print(data?.id);
+                         myBox.put('guid', data?.GUID);
                         },
                       ),
                       SizedBox(
@@ -177,8 +159,9 @@ class _dataInputState extends State<dataInput> {
                             style: buttonStyle,
                             onPressed: () {
                               if (_formKey.currentState!.validate()) {
-                                print(myBox.getAt(0));
-                                Navigator.of(context).pushReplacementNamed('/infrastructure');
+                                print(myBox.get('token'));
+                                print(myBox.get('guid'));
+                                //Navigator.of(context).pushReplacementNamed('/infrastructure');
                                // print(name.value);
                                // print(guid.value);
                               }
@@ -190,69 +173,7 @@ class _dataInputState extends State<dataInput> {
                     ],
                   ),
                 )
-              : Container(
-                  padding: EdgeInsets.only(left: 20, right: 20),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      /* Container(
-                  padding: EdgeInsets.only(left: 100, right: 100,top: 10, bottom: 10),
-                  color: Color(0xFF52647E),
-                  child: Text("Введите данные", style: TextStyle(color: Colors.white), textAlign: TextAlign.center),
-                ),*/
-                      TextFormField(
-                        controller: name,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return '* Необходимо заполнить данное поле';
-                          }
-                          return null;
-                        },
-                        decoration: InputDecoration(
-                          labelText: 'Введите название или GUID ИС',
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      TextField(
-                        controller: type,
-                        readOnly: true,
-                        decoration: InputDecoration(
-                          labelText: 'Тип расчета',
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          SizedBox(
-                            width: 20,
-                          ),
-                          OutlinedButton(
-                            style: buttonStyle,
-                            onPressed: () {
-                              if (_formKey.currentState!.validate()) {
-                              }
-                                print(name.value);
-                                print(guid.value);
-                            },
-                            child: Text("Расчет"),
-                          )
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
+              : Container(),
         ),
       ),
     );

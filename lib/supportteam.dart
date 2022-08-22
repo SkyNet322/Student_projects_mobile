@@ -63,11 +63,10 @@ class _supportPageState extends State<supportPage> {
   bool CheckVal4 = false;
   bool CheckVal5 = false;
   bool CheckVal6 = false;
-  var formDatat;
 
   Future<String> getAll(var token) async {
+    //var apiURL = 'http://37.145.168.238/api/getall';
     var apiURL = 'http://localhost/api/getall';
-    //var apiURL = 'http://78.107.209.48/api/login';
     Dio dio = Dio();
 
     Response response;
@@ -91,6 +90,8 @@ class _supportPageState extends State<supportPage> {
       if (response.statusCode == 200) {
         print("OK");
         print(response.data);
+        Navigator.of(context).pushNamed('/calculation');
+        return ' ';
       }
     } catch (e) {
       print(e);
@@ -102,7 +103,7 @@ class _supportPageState extends State<supportPage> {
   @override
   void initState() {
     super.initState();
-    token = tokenBox.getAt(0);
+    token = tokenBox.get('tokenа');
   }
 
   @override
@@ -181,18 +182,6 @@ class _supportPageState extends State<supportPage> {
     await myBox.put('supteam', devlist);
   }
 
-  // Future _formDat() async{
-  //   formDatat =
-  //   '{' + ""inflics"" +':'+
-  //   '{'+
-  //   myBox.get('infra_form')+
-  //   myBox.get('licen_form')+
-  //   "personnels" + ':' + '['+
-  //   myBox.get('devteam_form') +
-  //   myBox.get('supteam_form')+
-  //   ']'+
-  //   '}'+'}';
-  // }
   final ButtonStyle buttonStyle = OutlinedButton.styleFrom(
     primary: Colors.white,
     backgroundColor: Color(0xFF52647E),
@@ -839,15 +828,6 @@ class _supportPageState extends State<supportPage> {
                       _saveData();
                       //_formDat();
                       getAll(token);
-                      print({
-                        "inflics": {
-                          "infra": myBox.get('infra_form'),
-                          "licen": myBox.get('licen_form'),
-                        },
-                        "personnels":
-                            myBox.get('devteam') + myBox.get('supteam'),
-                      });
-                      Navigator.of(context).pushNamed('/calculation');
                     },
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),

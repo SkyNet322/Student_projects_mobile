@@ -27,8 +27,8 @@ class AuthorizationPageState extends State<AuthorizationPage> {
   final myBox = Hive.box('token_box');
 
   Future<String> loginApis(String user, String password) async {
-    //var apiURL = 'http://37.145.168.238/api/login';
-    var apiURL = 'http://localhost/api/login';
+    var apiURL = 'http://37.145.168.238/api/login';
+    //var apiURL = 'http://localhost/api/login';
 
     var formData = FormData.fromMap({
       'login': user,
@@ -56,8 +56,8 @@ class AuthorizationPageState extends State<AuthorizationPage> {
   }
   //
   Future<String> HeaderAuth(var token) async {
-    //var apiURL = 'http://37.145.168.238/api/user';
-    var apiURL = 'http://localhost/api/user';
+    var apiURL = 'http://37.145.168.238/api/user';
+    //var apiURL = 'http://localhost/api/user';
 
     Dio dio = Dio();
 
@@ -72,7 +72,7 @@ class AuthorizationPageState extends State<AuthorizationPage> {
     if(response.statusCode == 200){
       Navigator.pushNamed(context, '/datainput');
       Fluttertoast.showToast(
-          msg: response.data.toString(), webPosition: "center", timeInSecForIosWeb: 2);
+          msg: "Успешная авторизация", webPosition: "center", timeInSecForIosWeb: 2);
     }else{
       Fluttertoast.showToast(
           msg: response.statusMessage.toString(), backgroundColor: Colors.cyan);
@@ -206,86 +206,7 @@ class AuthorizationPageState extends State<AuthorizationPage> {
                     ],
                   ),
                 )
-              : Container(
-                  padding: EdgeInsets.only(left: 20, right: 20),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                        height: 10,
-                      ),
-                      TextFormField(
-                        controller: username,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return '* Необходимо заполнить данное поле';
-                          }
-                          return null;
-                        },
-                        decoration: InputDecoration(
-                          labelText: 'Имя пользователя',
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 16,
-                      ),
-                      TextFormField(
-                        controller: password,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return '* Необходимо заполнить данное поле';
-                          }
-                          return null;
-                        },
-                        decoration: InputDecoration(
-                          labelText: 'Пароль',
-                          suffixIcon: IconButton(
-                            onPressed: () {
-                              setState(
-                                () {
-                                  passObscure = !passObscure;
-                                },
-                              );
-                            },
-                            icon: Icon(passObscure
-                                ? Icons.visibility_off
-                                : Icons.visibility),
-                          ),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                        ),
-                        obscureText: passObscure,
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          SizedBox(
-                            width: 20,
-                          ),
-                          OutlinedButton(
-                            style: buttonStyle,
-                            onPressed: () {
-                              if (_formKey.currentState!.validate()) {
-                                // Navigator.of(context).pushNamed('/datainput',);
-                                print(username.value);
-                                print(password.value);
-                              }
-                            },
-                            child: Text("Вход"),
-                          )
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
+              : Container(),
         ),
       ),
     );
