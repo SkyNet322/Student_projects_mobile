@@ -27,8 +27,8 @@ class AuthorizationPageState extends State<AuthorizationPage> {
   final myBox = Hive.box('token_box');
 
   Future<String> loginApis(String user, String password) async {
-    var apiURL = 'http://37.145.168.238/api/login';
-    //var apiURL = 'http://localhost/api/login';
+    //var apiURL = 'http://37.145.168.238/api/login';
+    var apiURL = 'http://localhost/api/login';
 
     var formData = FormData.fromMap({
       'login': user,
@@ -56,8 +56,8 @@ class AuthorizationPageState extends State<AuthorizationPage> {
   }
   //
   Future<String> HeaderAuth(var token) async {
-    var apiURL = 'http://37.145.168.238/api/user';
-    //var apiURL = 'http://localhost/api/user';
+    //var apiURL = 'http://37.145.168.238/api/user';
+    var apiURL = 'http://localhost/api/user';
 
     Dio dio = Dio();
 
@@ -70,7 +70,7 @@ class AuthorizationPageState extends State<AuthorizationPage> {
         ),
       );
     if(response.statusCode == 200){
-      Navigator.pushNamed(context, '/datainput');
+      Navigator.pushReplacementNamed(context, '/datainput');
       Fluttertoast.showToast(
           msg: "Успешная авторизация", webPosition: "center", timeInSecForIosWeb: 2);
     }else{

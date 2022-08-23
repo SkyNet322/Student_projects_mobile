@@ -16,6 +16,7 @@ Future<void> main() async {
   await Hive.openBox('token_box');
   await Hive.openBox('infra_box');
   await Hive.openBox('temp_box');
+  await Hive.openBox('guid_box');
   runApp(const MyApp());
 }
 

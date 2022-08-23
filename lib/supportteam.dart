@@ -55,6 +55,7 @@ class _supportPageState extends State<supportPage> {
 
   final myBox = Hive.box('infra_box');
   final tokenBox = Hive.box('token_box');
+  final myBox2 = Hive.box('guid_box');
   var token;
   bool allVal = false;
   bool CheckVal1 = false;
@@ -74,6 +75,7 @@ class _supportPageState extends State<supportPage> {
       response = await dio.post(
         apiURL,
         data: {
+          "guid_id": myBox2.get('GUID_id'),
           "inflics": {
             "infra": myBox.get('infra_form'),
             "licen": myBox.get('licen_form'),
@@ -90,7 +92,7 @@ class _supportPageState extends State<supportPage> {
       if (response.statusCode == 200) {
         print("OK");
         print(response.data);
-        Navigator.of(context).pushNamed('/calculation');
+        Navigator.of(context).pushReplacementNamed('/calculation');
         return ' ';
       }
     } catch (e) {
@@ -103,7 +105,7 @@ class _supportPageState extends State<supportPage> {
   @override
   void initState() {
     super.initState();
-    token = tokenBox.get('tokenа');
+    token = tokenBox.get('token');
   }
 
   @override
@@ -826,7 +828,7 @@ class _supportPageState extends State<supportPage> {
                   OutlinedButton(
                     onPressed: () {
                       _saveData();
-                      //_formDat();
+                      print(tokenBox.get('GUID_id'));
                       getAll(token);
                     },
                     child: Padding(

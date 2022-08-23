@@ -509,7 +509,7 @@ class _infrastructurePageState extends State<infrastructurePage> {
                               child: OutlinedButton(
                                 onPressed: () {
                                   _saveData();
-                                  Navigator.of(context).pushNamed(
+                                  Navigator.of(context).pushReplacementNamed(
                                     '/licNsoft',
                                   );
                                 },
@@ -535,6 +535,8 @@ class _infrastructurePageState extends State<infrastructurePage> {
     );
   }
 
+
+
   void _textFieldsClear() {
     infrastructureTotalCostFirstYear.clear();
     infrastructureTotalCostSecondYear.clear();
@@ -553,3 +555,4 @@ class _infrastructurePageState extends State<infrastructurePage> {
     usingTotalCostFifthYear.clear();
   }
 }
+
