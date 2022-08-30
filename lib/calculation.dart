@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:io';
+import 'dart:html' as html;
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
@@ -29,10 +32,39 @@ class _CalculationPageState extends State<CalculationPage> {
     ),
   );
 
+  void getFile(var token) async {
+    var apiURL = 'http://localhost/api/export';
+    var id = myBox2.get('GUID_id').toString();
+    Dio dio = Dio();
+    Response response;
+    try {
+      response = await dio.post(
+        apiURL,
+        data: { "guid_id" : id },
+        options: Options(
+          headers: {"Authorization": "Bearer $token"},
+        ),
+      );
+      if(response.statusCode == 200){
+
+       downloadFile(response.data.toString());
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  void downloadFile(String url) {
+    var urll = "http://localhost/"  + url.substring(21);
+    print(urll);
+    html.AnchorElement anchorElement =  new html.AnchorElement(href: urll);
+    anchorElement.download = urll;
+    anchorElement.click();
+  }
+
   Future<String?> calculate(String tok) async {
     var apiURL =
         'http://localhost/api/calculate/' + myBox2.get('GUID_id').toString();
-    //var apiURL = 'http://37.145.168.238/api/getguid';
     print(apiURL);
     Dio dio = Dio();
     Response response;
@@ -58,7 +90,7 @@ class _CalculationPageState extends State<CalculationPage> {
     return null;
   }
 
-  Future saveMap( tmp) async {
+  Future saveMap(tmp) async {
     await myBox.put('map', tmp);
     //print("saved");
     return null;
@@ -119,7 +151,6 @@ class _CalculationPageState extends State<CalculationPage> {
             alignment: Alignment.center,
             child: isWeb
                 ? FutureBuilder(
-
                     future: getData(),
                     builder: (ctx, snapshot) {
                       if (snapshot.connectionState == ConnectionState.done) {
@@ -1554,9 +1585,9 @@ class _CalculationPageState extends State<CalculationPage> {
                                     Padding(
                                       padding: EdgeInsets.only(right: 40),
                                       child: OutlinedButton.icon(
-                                        onPressed: () {
-                                          //temp = calc.inflic![0].year1.toString();
-                                          //print("ss - $temp");
+                                        onPressed: () async {
+                                         //exportExcelForWeb(token);
+                                         getFile(token);
                                         },
                                         icon: Icon(Icons.download, size: 15),
                                         label: Text(
