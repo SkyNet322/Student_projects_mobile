@@ -1,13 +1,10 @@
-import 'dart:html';
-
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'dart:convert';
 import 'package:dropdown_search/dropdown_search.dart';
-
 import 'models/data_model.dart';
+
 class dataInput extends StatefulWidget {
   const dataInput({Key? key}) : super(key: key);
 
@@ -30,8 +27,44 @@ class _dataInputState extends State<dataInput> {
   );
 
   final myBox = Hive.box('token_box');
+  final myBox2 = Hive.box('guid_box');
   var token;
 
+  Future<String> GUID_Id(var token, int guid) async {
+    //var apiURL = 'http://37.145.168.238/api/usedata';
+    var apiURL = 'http://localhost/api/usedata';
+
+
+    Dio dio = Dio();
+
+    Response response;
+    try {
+      response = await dio.post(
+        apiURL,
+        data: { "GUID" : guid },
+        options: Options(
+          headers: {"Authorization": "Bearer $token"},
+        ),
+      );
+
+      if(response.statusCode == 200){
+        if(response.data['calculated'] == 'false'){
+          print('ID');
+           myBox2.put('GUID_id',response.data['id']);
+          Navigator.of(context).pushReplacementNamed('/infrastructure');
+        }else{
+          print('non ID');
+          myBox2.put('GUID_id',response.data['id']);
+          Navigator.of(context).pushReplacementNamed('/calculation');
+        }
+      }
+
+    } catch (e) {
+      print(e.toString());
+      return '';
+    }
+    return '';
+  }
   @override
   void initState() {
     //HeaderAuth(token);
@@ -114,8 +147,8 @@ class _dataInputState extends State<dataInput> {
                         ),
                         asyncItems: (String filter) async {
                           var response = await Dio().get(
-                            "http://37.145.168.238/api/getguid",
-                            //"http://localhost/api/getguid",
+                           // "http://37.145.168.238/api/getguid",
+                            "http://localhost/api/getguid",
                             options: Options(
                               headers: {"Authorization": "Bearer $token"},
                             ),
@@ -130,7 +163,8 @@ class _dataInputState extends State<dataInput> {
                           return null;
                         } ,
                         onChanged: (DataModel? data) {
-                         myBox.put('guid', data?.GUID);
+                          String? tmp = data?.GUID;
+                         myBox2.put('guid', int.parse(tmp!));
                         },
                       ),
                       SizedBox(
@@ -159,11 +193,10 @@ class _dataInputState extends State<dataInput> {
                             style: buttonStyle,
                             onPressed: () {
                               if (_formKey.currentState!.validate()) {
+  
+                                GUID_Id(token, myBox2.get('guid'));
                                 print(myBox.get('token'));
-                                print(myBox.get('guid'));
-                                //Navigator.of(context).pushReplacementNamed('/infrastructure');
-                               // print(name.value);
-                               // print(guid.value);
+                                print(myBox2.get('guid'));
                               }
                             },
                             child: Text("Расчет"),

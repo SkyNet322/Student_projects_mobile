@@ -461,7 +461,7 @@ class _licensesNsoftwarePageState extends State<licensesNsoftwarePage> {
                               child: OutlinedButton(
                                 onPressed: () {
                                   _saveData();
-                                  Navigator.of(context).pushNamed('/develop',);
+                                  Navigator.of(context).pushReplacementNamed('/develop',);
                                 },
                                 child: Padding(
                                   padding: const EdgeInsets.all(8.0),

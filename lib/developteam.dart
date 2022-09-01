@@ -770,7 +770,7 @@ class _developPageState extends State<developPage> {
                   OutlinedButton(
                     onPressed: () {
                       _saveData();
-                      Navigator.of(context).pushNamed('/support');
+                      Navigator.of(context).pushReplacementNamed('/support');
                     },
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
